@@ -3,6 +3,9 @@
 # AUTHOR: Johan Zicola
 # DATE: 2018-01-26
 
+# Modified by Benjamin Van Doren
+# DATE: 2023-06-09
+
 # DESCRIPTION: This script performs GWAS using as input a vcf file and a phenotype file
 # The phenotype file should contain as many values as individuals in the vcf file.
 # The order of the accessions in the vcf file should be the same than the order of the 
@@ -183,7 +186,7 @@ if [ -e ${path_prefix_vcf}.bed ] && [ -e ${path_prefix_vcf}.bim ] && [ -e ${path
 	echo "File ${path_prefix_vcf}.bed, ${path_prefix_vcf}.bim, ${path_prefix_vcf}.fam already exist. Go to next step."
 else
 	printf "plink --file ${path_prefix_vcf} --make-bed --out ${path_prefix_vcf}" 
-	plink --file ${path_prefix_vcf} --make-bed --out ${path_prefix_vcf}  
+	plink --file ${path_prefix_vcf} --make-bed --allow-extra-chr --allow-no-sex --out ${path_prefix_vcf}  
 fi
 
 
