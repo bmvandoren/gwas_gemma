@@ -121,7 +121,8 @@ if [ "$#" -eq 3 ];	then
 			exit 0
 		else
 			# Get prefix of the covariate file to add as suffix in final output name
-			covariate_prefix="${covariate_file%.*}"
+			covariate_basename="$(basename covariate_file)"
+			covariate_prefix="${covariate_basename%.*}"
 		fi
 	else
 			echo "Covariate file $covariate_file does not exist"
@@ -278,11 +279,11 @@ fi
 
 echo -e "\n########################## POLISHING GEMMA OUTPUT ############################\n"
 
-# Polish file for R
-echo -e "Reformat assoc.txt file to be compatible with manhattan library in R:"
-
-echo "python $assoc2qqman ${current_path}/output/${prefix_gwas}.assoc.txt > ${current_path}/output/${prefix_gwas}.assoc.clean.txt"
-python $assoc2qqman ${current_path}/output/${prefix_gwas}.assoc.txt > ${current_path}/output/${prefix_gwas}.assoc.clean.txt
+# # Polish file for R
+# echo -e "Reformat assoc.txt file to be compatible with manhattan library in R:"
+# 
+# echo "python $assoc2qqman ${current_path}/output/${prefix_gwas}.assoc.txt > ${current_path}/output/${prefix_gwas}.assoc.clean.txt"
+# python $assoc2qqman ${current_path}/output/${prefix_gwas}.assoc.txt > ${current_path}/output/${prefix_gwas}.assoc.clean.txt
 
 # Move the output data into dir_file
 
@@ -317,7 +318,7 @@ if [ -e ${current_path}/output/${prefix_gwas}.log.txt ]; then
 	if [ $covariate_file ]; then
 		echo "Covariate file: $covariate_file" >> ${current_path}/output/temp.txt
 	fi
-	echo "Output file: ${dir_file}/output/${prefix_gwas}.assoc.clean.txt" >> ${current_path}/output/temp.txt
+# 	echo "Output file: ${dir_file}/output/${prefix_gwas}.assoc.clean.txt" >> ${current_path}/output/temp.txt
 	echo -e "Run finished on $(date)" >> ${current_path}/output/temp.txt
 	echo -e "Total time of the run: $runtime seconds \n" >> ${current_path}/output/temp.txt
 	echo "Log output from GEMMA:" >>  ${current_path}/output/temp.txt
